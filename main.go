@@ -19,7 +19,7 @@ func main() {
 
 	// Register routes
 	routes.UserRoutes(app)
-	routes.SessionRoutes(app)
+	routes.ProfileRoutes(app) // Add profile routes
 
 	// Start the server
 	if err := app.Listen(":3000"); err != nil {

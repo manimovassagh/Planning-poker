@@ -26,4 +26,8 @@ Content-Type: application/json
   "password": "Manimov!"
 }
 
-# After successful login, copy the token value returned in the response and set it as @jwt_token in this file for further testing.
+
+### 1. Register a New User ###
+# Get the authenticated user's profile
+GET {{base_url}}/api/user/me
+Authorization: Bearer {{jwt_token}}
