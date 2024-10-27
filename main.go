@@ -1,25 +1,28 @@
+// main.go
+
 package main
 
 import (
 	"log"
 
-	"github.com/manimovassagh/Planning-poker/models"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
+	"github.com/gofiber/fiber/v2"
+	"github.com/manimovassagh/Planning-poker/database"
+	"github.com/manimovassagh/Planning-poker/routes"
 )
 
 func main() {
-	// Connect to SQLite
-	db, err := gorm.Open(sqlite.Open("planning_poker_dev.db"), &gorm.Config{})
-	if err != nil {
-		log.Fatal("Failed to connect to the database:", err)
-	}
+	// Initialize the database connection
+	database.InitializeDatabase()
 
-	// Run migrations
-	err = db.AutoMigrate(&models.User{}, &models.Session{}, &models.Task{}, &models.Vote{}, &models.SessionParticipant{})
-	if err != nil {
-		log.Fatal("Failed to run migrations:", err)
-	}
+	// Set up Fiber app
+	app := fiber.New()
 
-	log.Println("Database migration completed successfully with SQLite.")
+	// Register routes
+	routes.UserRoutes(app)
+	routes.SessionRoutes(app)
+
+	// Start the server
+	if err := app.Listen(":3000"); err != nil {
+		log.Fatal("Server failed to start:", err)
+	}
 }
