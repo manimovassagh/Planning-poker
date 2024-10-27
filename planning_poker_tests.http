@@ -1,0 +1,106 @@
+@base_url = http://localhost:3000
+@jwt_token = your_jwt_token_here
+
+### User Management Tests ###
+
+# Register a new user
+POST {{base_url}}/api/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "testuser@example.com",
+  "password": "testpassword",
+  "nickname": "Tester"
+}
+
+### Login user
+POST {{base_url}}/api/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testpassword"
+}
+
+### Session Management Tests ###
+
+# Create a new session (as Admin)
+POST {{base_url}}/api/sessions
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "session_name": "Sprint Planning"
+}
+
+# Get all active sessions
+GET {{base_url}}/api/sessions
+Authorization: Bearer {{jwt_token}}
+
+# Get specific session details
+GET {{base_url}}/api/sessions/1
+Authorization: Bearer {{jwt_token}}
+
+# Join a session as Participant
+POST {{base_url}}/api/sessions/1/join
+Authorization: Bearer {{jwt_token}}
+
+# Leave a session
+POST {{base_url}}/api/sessions/1/leave
+Authorization: Bearer {{jwt_token}}
+
+### Task Management Tests ###
+
+# Add a new task to a session (Admin only)
+POST {{base_url}}/api/sessions/1/tasks
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "task_name": "Task 1",
+  "task_description": "Implement login functionality"
+}
+
+# Get all tasks for a session
+GET {{base_url}}/api/sessions/1/tasks
+Authorization: Bearer {{jwt_token}}
+
+# Get a specific task
+GET {{base_url}}/api/sessions/1/tasks/1
+Authorization: Bearer {{jwt_token}}
+
+# Update a task (Admin only)
+PUT {{base_url}}/api/sessions/1/tasks/1
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "task_description": "Update login functionality description",
+  "status": "completed"
+}
+
+### Voting Tests ###
+
+# Submit a vote for a task (Participant only)
+POST {{base_url}}/api/sessions/1/tasks/1/vote
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "vote_value": 5
+}
+
+# Get all votes for a task (Admin only)
+GET {{base_url}}/api/sessions/1/tasks/1/votes
+Authorization: Bearer {{jwt_token}}
+
+# Reveal votes for a task (Admin only)
+POST {{base_url}}/api/sessions/1/tasks/1/reveal-votes
+Authorization: Bearer {{jwt_token}}
+
+### WebSocket Test (for Real-Time Communication) ###
+
+# Connect to WebSocket for a session (use a WebSocket client)
+ws://{{base_url}}/ws/sessions/1
+Authorization: Bearer {{jwt_token}}

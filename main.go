@@ -2,9 +2,10 @@ package main
 
 import (
 	"log"
+
+	"github.com/manimovassagh/Planning-poker/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"your_project_path/models" // Replace with the actual path to your models
 )
 
 func main() {
