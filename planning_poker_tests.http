@@ -69,3 +69,38 @@ Content-Type: application/json
 # View all tasks in a session
 GET {{base_url}}/api/sessions/1/tasks
 Authorization: Bearer {{jwt_token}}
+
+
+###
+# Submit a vote for a task
+POST {{base_url}}/api/sessions/1/tasks/1/vote
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "vote_value": 5
+}
+
+
+###
+# View all votes for a task (admin only)
+GET {{base_url}}/api/sessions/1/tasks/1/votes
+Authorization: Bearer {{jwt_token}}
+
+
+###
+# Reveal votes for a task (admin only)
+POST {{base_url}}/api/sessions/1/tasks/1/reveal
+Authorization: Bearer {{jwt_token}}
+
+
+###
+# Close a session (admin only)
+POST {{base_url}}/api/sessions/1/close
+Authorization: Bearer {{jwt_token}}
+
+
+###
+# View session summary (admin only)
+GET {{base_url}}/api/sessions/1/summary
+Authorization: Bearer {{jwt_token}}

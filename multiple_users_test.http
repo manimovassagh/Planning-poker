@@ -1,0 +1,142 @@
+### Define Variables for Tokens
+@admin_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzAxMjA4MDgsInVzZXJfaWQiOjF9.cnk2DpOzft_C2uzJt1sgpdsrg_oD0gqQC7lOA2AZo18
+@user1_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzAxMjA4MzAsInVzZXJfaWQiOjJ9.p-v-DUL4eOm8CbWUvq12-rD4IZhDeMC5inNllOf-M2E
+@user2_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzAxMjA4NjMsInVzZXJfaWQiOjN9.fEowBTtcj88Id3vg1VeGqfaMEMmfLd55_Ojwv_gucL8
+@session_id = 1
+@task_id = 1
+
+
+### Register Admin User
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+  "username": "admin_user",
+  "email": "admin@example.com",
+  "password": "admin_password",
+  "nickname": "Admin"
+}
+
+### Register User 1
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "email": "user1@example.com",
+  "password": "password1",
+  "nickname": "UserOne"
+}
+
+### Register User 2
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "email": "user2@example.com",
+  "password": "password2",
+  "nickname": "UserTwo"
+}
+
+### Admin Login
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "admin_user",
+  "password": "admin_password"
+}
+
+### User 1 Login
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "password1"
+}
+
+### User 2 Login
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "password": "password2"
+}
+
+### Create a Session (Admin Only)
+POST http://localhost:3000/api/sessions
+Authorization: Bearer {{admin_token}}
+Content-Type: application/json
+
+{
+  "session_name": "Sprint Planning Session"
+}
+
+
+
+### Create a Task (Admin Only)
+POST http://localhost:3000/api/sessions/{{session_id}}/tasks
+Authorization: Bearer {{admin_token}}
+Content-Type: application/json
+
+{
+  "task_name": "User Login Feature",
+  "task_description": "Implement user login functionality with JWT authentication"
+}
+
+
+
+### User 1 Joins Session
+POST http://localhost:3000/api/sessions/{{session_id}}/join
+Authorization: Bearer {{user1_token}}
+Content-Type: application/json
+
+{}
+
+### User 2 Joins Session
+POST http://localhost:3000/api/sessions/{{session_id}}/join
+Authorization: Bearer {{user2_token}}
+Content-Type: application/json
+
+{}
+
+### Admin Joins Session
+POST http://localhost:3000/api/sessions/{{session_id}}/join
+Authorization: Bearer {{{{admin_token}}
+Content-Type: application/json
+
+{}
+
+### Submit Vote for User 1
+POST http://localhost:3000/api/sessions/{{session_id}}/tasks/{{task_id}}/vote
+Authorization: Bearer {{user1_token}}
+Content-Type: application/json
+
+{
+  "vote_value": 3
+}
+
+### Submit Vote for User 2
+POST http://localhost:3000/api/sessions/{{session_id}}/tasks/{{task_id}}/vote
+Authorization: Bearer {{user2_token}}
+Content-Type: application/json
+
+{
+  "vote_value": 5
+}
+
+### Submit Vote for Admin
+POST http://localhost:3000/api/sessions/{{session_id}}/tasks/{{task_id}}/vote
+Authorization: Bearer {{admin_token}}
+Content-Type: application/json
+
+{
+  "vote_value": 8
+}
+
+### Reveal Votes (Admin Only)
+POST http://localhost:3000/api/sessions/{{session_id}}/tasks/{{task_id}}/reveal
+Authorization: Bearer {{admin_token}}

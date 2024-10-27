@@ -1,5 +1,3 @@
-// main.go
-
 package main
 
 import (
@@ -19,7 +17,8 @@ func main() {
 	// Register routes
 	routes.UserRoutes(app)
 	routes.ProfileRoutes(app)
-	routes.SessionRoutes(app) // Add session routes
+	routes.SessionRoutes(app)
+	routes.WebSocketRoutes(app) // Register WebSocket routes
 
 	// Start the server
 	if err := app.Listen(":3000"); err != nil {

@@ -10,8 +10,13 @@ require (
 )
 
 require (
+	github.com/fasthttp/websocket v1.5.3 // indirect
+	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
+)
+
+require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
-	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/gofiber/websocket/v2 v2.2.1
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
