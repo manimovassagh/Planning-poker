@@ -1,3 +1,5 @@
+// models/vote.go
+
 package models
 
 import (

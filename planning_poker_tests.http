@@ -41,3 +41,31 @@ Content-Type: application/json
 {
   "session_name": "Sprint Planning Session"
 }
+
+
+###
+# Join a session
+POST {{base_url}}/api/sessions/1/join
+Authorization: Bearer {{jwt_token}}
+
+
+###
+# View all participants in a session
+GET {{base_url}}/api/sessions/1/participants
+Authorization: Bearer {{jwt_token}}
+
+###
+# Create a new task in a session
+POST {{base_url}}/api/sessions/1/tasks
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "task_name": "User Login Feature",
+  "task_description": "Implement user login functionality with JWT authentication"
+}
+
+###
+# View all tasks in a session
+GET {{base_url}}/api/sessions/1/tasks
+Authorization: Bearer {{jwt_token}}

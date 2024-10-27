@@ -1,3 +1,5 @@
+// models/session_participant.go
+
 package models
 
 import (
