@@ -27,7 +27,17 @@ Content-Type: application/json
 }
 
 
-### 1. Register a New User ###
+### 1. User profile ###
 # Get the authenticated user's profile
 GET {{base_url}}/api/user/me
 Authorization: Bearer {{jwt_token}}
+
+###
+# Create a new session
+POST {{base_url}}/api/sessions
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "session_name": "Sprint Planning Session"
+}
